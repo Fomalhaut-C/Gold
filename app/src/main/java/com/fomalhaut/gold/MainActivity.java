@@ -1,6 +1,9 @@
 package com.fomalhaut.gold;
 
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -57,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
+        changeIconImgBottomMargin(main_tl,3);
     }
 
     private void initVp() {
@@ -74,12 +77,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void changeIconImgBottomMargin(ViewGroup parent, int px) {
+        for (int i = 0; i < parent.getChildCount(); i++) {
+            View child = parent.getChildAt(i);
+            if (child instanceof ViewGroup) {
+                changeIconImgBottomMargin((ViewGroup) child, px);
+            } else if (child instanceof ImageView) {
+                ViewGroup.MarginLayoutParams lp = ((ViewGroup.MarginLayoutParams) child.getLayoutParams());
+                lp.bottomMargin = 0;
+                child.requestLayout();
+            }
+        }
+    }
+
     private class MyVpAdapter extends FragmentStatePagerAdapter{
         List<Fragment> fragmentList;
         public MyVpAdapter(FragmentManager fm,List <Fragment> fragmentList) {
             super(fm);
             this.fragmentList=fragmentList;
-
         }
 
         @Override
