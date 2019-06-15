@@ -12,61 +12,6 @@
         app:cardCornerRadius="10dp"
         app:cardElevation="10dp">
 
-        <!--<androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/gold_item_tv_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="16dp"
-                android:text="Ag(T+D)"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/gold_item_tv_closePri"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/gold_item_tv_closePri"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:gravity="center"
-                android:text="6585.00"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/gold_item_tv_time"
-                app:layout_constraintEnd_toStartOf="@+id/gold_item_tv_limit"
-                app:layout_constraintStart_toEndOf="@+id/gold_item_tv_name"
-                app:layout_constraintTop_toTopOf="@+id/gold_item_tv_name" />
-
-            <TextView
-                android:id="@+id/gold_item_tv_time"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:gravity="center"
-                android:text="15:29:59"
-                app:layout_constraintBottom_toBottomOf="@+id/gold_item_tv_name"
-                app:layout_constraintEnd_toEndOf="@+id/gold_item_tv_closePri"
-                app:layout_constraintStart_toStartOf="@+id/gold_item_tv_closePri"
-                app:layout_constraintTop_toBottomOf="@+id/gold_item_tv_closePri" />
-
-            <TextView
-                android:id="@+id/gold_item_tv_limit"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:gravity="center"
-                android:padding="16dp"
-                android:text="-1.98%"
-                android:textColor="#15F11A"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="@+id/gold_item_tv_time"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/gold_item_tv_closePri"
-                app:layout_constraintTop_toTopOf="@+id/gold_item_tv_closePri" />
-        </androidx.constraintlayout.widget.ConstraintLayout>-->
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

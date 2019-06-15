@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private void initTl() {
         main_tl.addTab(main_tl.newTab().setText("黄金").setIcon(R.drawable.selector_gold));
         main_tl.addTab(main_tl.newTab().setText("期货").setIcon(R.drawable.selector_forward));
-//        main_tl.addTab(main_tl.newTab().setText("银行").setIcon(R.drawable.selector_bank));
+        main_tl.addTab(main_tl.newTab().setText("银行").setIcon(R.drawable.selector_bank));
         main_tl.addTab(main_tl.newTab().setText("我").setIcon(R.drawable.selector_me));
         main_tl.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
     private void initVp() {
         List<Fragment> fragmentList = new ArrayList<>();
         fragmentList.add(new GoldFragment(MainActivity.this));
-        fragmentList.add(new ForwardFragment());
+        fragmentList.add(new ForwardFragment(MainActivity.this));
         fragmentList.add(new BankFragment());
         fragmentList.add(new MeFragment());
         main_vp.setAdapter(new MyVpAdapter(getSupportFragmentManager(),fragmentList));
@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
                 main_tl.getTabAt(position).select();
             }
         });
+        main_vp.setOffscreenPageLimit(4);
     }
 
     private void changeIconImgBottomMargin(ViewGroup parent, int px) {

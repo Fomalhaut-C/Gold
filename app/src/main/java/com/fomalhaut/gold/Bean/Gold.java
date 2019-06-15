@@ -5,14 +5,22 @@ import java.util.List;
 public class Gold {
 
     /**
-     * msg : success
-     * result : [{"closePri":"299.64","highPic":"300.51","limit":"0.89%","lowPic":"296.08","name":"沪金9999","openPri":"298.00","time":"2019-06-12 15:30:03","totalTurnover":"369049952000.00","totalVol":"1233126.00","variety":"AU99.99","yesDayPic":"297.00"},{"closePri":"--","highPic":"--","limit":"--","lowPic":"--","name":"黄金995","openPri":"--","time":"2019-06-11 20:00:00","totalTurnover":"--","totalVol":"--","variety":"AU995","yesDayPic":"271.60"},{"closePri":"299.72","highPic":"300.53","limit":"0.85%","lowPic":"296.05","name":"黄金延期","openPri":"296.05","time":"2019-06-12 15:30:03","totalTurnover":"29626340000.00","totalVol":"99274.00","variety":"Au(T+D)","yesDayPic":"298.12"},{"closePri":"299.75","highPic":"300.70","limit":"0.79%","lowPic":"296.50","name":"延期单金","openPri":"296.50","time":"2019-06-12 15:29:24","totalTurnover":"3680344750.00","totalVol":"12276.00","variety":"Au(T+N1)","yesDayPic":"298.15"},{"closePri":"302.50","highPic":"303.30","limit":"1.14%","lowPic":"298.60","name":"延期双金","openPri":"298.60","time":"2019-06-12 15:29:19","totalTurnover":"1561847375.00","totalVol":"5188.00","variety":"Au(T+N2)","yesDayPic":"300.30"},{"closePri":"299.20","highPic":"300.06","limit":"0.82%","lowPic":"296.53","name":"沪金100G","openPri":"296.58","time":"2019-06-12 15:29:56","totalTurnover":"165871468.80","totalVol":"556.00","variety":"Au100g","yesDayPic":"296.76"},{"closePri":"--","highPic":"--","limit":"--","lowPic":"--","name":"沪 条50G","openPri":"--","time":"2019-06-12 15:30:03","totalTurnover":"--","totalVol":"--","variety":"Au50g","yesDayPic":"255.00"},{"closePri":"299.80","highPic":"300.35","limit":"0.92%","lowPic":"297.70","name":"沪  金95","openPri":"297.70","time":"2019-06-12 15:28:41","totalTurnover":"390235062.50","totalVol":"1304.00","variety":"Au99.95","yesDayPic":"297.06"},{"closePri":"299.64","highPic":"300.51","limit":"0.89%","lowPic":"296.08","name":"沪  金99","openPri":"298.00","time":"2019-06-12 15:30:03","totalTurnover":"36904996000.00","totalVol":"123312.00","variety":"Au99.99","yesDayPic":"297.00"},{"closePri":"280.00","highPic":"280.00","limit":"-3.11%","lowPic":"280.00","name":"I黄金100G","openPri":"280.00","time":"2019-06-12 14:12:10","totalTurnover":"560000.00","totalVol":"2.00","variety":"IAU100G","yesDayPic":"289.00"},{"closePri":"--","highPic":"--","limit":"--","lowPic":"--","name":"I黄金995","openPri":"--","time":"2019-06-11 20:00:00","totalTurnover":"--","totalVol":"--","variety":"IAU99.5","yesDayPic":"237.80"},{"closePri":"297.50","highPic":"297.80","limit":"0.70%","lowPic":"296.10","name":"I黄金9999","openPri":"296.10","time":"2019-06-12 15:28:18","totalTurnover":"9464519000.00","totalVol":"31790.00","variety":"IAU99.99","yesDayPic":"295.42"},{"closePri":"299.77","highPic":"300.60","limit":"0.83%","lowPic":"296.23","name":"M黄金延期","openPri":"296.33","time":"2019-06-12 15:30:03","totalTurnover":"34467996000.00","totalVol":"115320.00","variety":"MAUTD","yesDayPic":"298.15"},{"closePri":"188.39","highPic":"188.39","limit":"1.64%","lowPic":"188.39","name":"沪  铂95","openPri":"188.39","time":"2019-06-12 14:59:25","totalTurnover":"6782040.00","totalVol":"36.00","variety":"Pt99.95","yesDayPic":"185.35"}]
-     * retCode : 200
+     * status : 0
+     * msg : ok
+     * result : [{"type":"Au(T+D)","typename":"黄金延期","price":"304.53","openingprice":"304.90","maxprice":"305.45","minprice":"303.50","changepercent":"-0.20%","lastclosingprice":"305.14","tradeamount":"56668.0000","updatetime":"2019-06-14 23:59:14"},{"type":"mAu(T+D)","typename":"迷你黄金延期","price":"304.44","openingprice":"305.00","maxprice":"306.11","minprice":"303.61","changepercent":"-0.21%","lastclosingprice":"305.09","tradeamount":"49918.0000","updatetime":"2019-06-14 23:59:04"},{"type":"Au99.99","typename":"沪金99","price":"304.40","openingprice":"306.00","maxprice":"306.01","minprice":"303.60","changepercent":"-0.21%","lastclosingprice":"305.04","tradeamount":"14458.0000","updatetime":"2019-06-14 23:59:13"},{"type":"Au(T+N2)","typename":"延期双金","price":"307.20","openingprice":"317.00","maxprice":"317.00","minprice":"306.10","changepercent":"-0.03%","lastclosingprice":"307.30","tradeamount":"612.0000","updatetime":"2019-06-14 23:59:14"},{"type":"Au(T+N1)","typename":"延期单金","price":"311.50","openingprice":"306.60","maxprice":"313.00","minprice":"306.60","changepercent":"2.00%","lastclosingprice":"305.40","tradeamount":"272.0000","updatetime":"2019-06-14 23:59:14"},{"type":"iAu99.99","typename":"IAU99.99","price":"301.00","openingprice":"302.00","maxprice":"302.00","minprice":"300.80","changepercent":"-0.49%","lastclosingprice":"302.47","tradeamount":"120.0000","updatetime":"2019-06-14 23:59:03"},{"type":"Au100g","typename":"沪金100G","price":"304.00","openingprice":"305.25","maxprice":"305.25","minprice":"303.55","changepercent":"-0.11%","lastclosingprice":"304.33","tradeamount":"32.0000","updatetime":"2019-06-14 23:59:13"},{"type":"Au99.95","typename":"沪金95","price":"305.00","openingprice":"305.00","maxprice":"305.00","minprice":"305.00","changepercent":"-0.01%","lastclosingprice":"305.02","tradeamount":"6.0000","updatetime":"2019-06-14 23:59:13"},{"type":"iAu100g","typename":"IAU100G","price":"0.00","openingprice":"0.00","maxprice":"0.00","minprice":"0.00","changepercent":"0.00%","lastclosingprice":"280.00","tradeamount":"0.0000","updatetime":"2019-06-14 23:59:13"},{"type":"iAu99.5","typename":"IAU99.5","price":"0.00","openingprice":"0.00","maxprice":"0.00","minprice":"0.00","changepercent":"0.00%","lastclosingprice":"237.80","tradeamount":"0.0000","updatetime":"2019-06-14 23:59:03"},{"type":"Pt99.95","typename":"沪铂95","price":"0.00","openingprice":"0.00","maxprice":"0.00","minprice":"0.00","changepercent":"0.00%","lastclosingprice":"187.50","tradeamount":"0.0000","updatetime":"2019-06-14 23:59:03"}]
      */
 
+    private int status;
     private String msg;
-    private String retCode;
     private List<ResultBean> result;
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
     public String getMsg() {
         return msg;
@@ -20,14 +28,6 @@ public class Gold {
 
     public void setMsg(String msg) {
         this.msg = msg;
-    }
-
-    public String getRetCode() {
-        return retCode;
-    }
-
-    public void setRetCode(String retCode) {
-        this.retCode = retCode;
     }
 
     public List<ResultBean> getResult() {
@@ -40,117 +40,107 @@ public class Gold {
 
     public static class ResultBean {
         /**
-         * closePri : 299.64
-         * highPic : 300.51
-         * limit : 0.89%
-         * lowPic : 296.08
-         * name : 沪金9999
-         * openPri : 298.00
-         * time : 2019-06-12 15:30:03
-         * totalTurnover : 369049952000.00
-         * totalVol : 1233126.00
-         * variety : AU99.99
-         * yesDayPic : 297.00
+         * type : Au(T+D)
+         * typename : 黄金延期
+         * price : 304.53
+         * openingprice : 304.90
+         * maxprice : 305.45
+         * minprice : 303.50
+         * changepercent : -0.20%
+         * lastclosingprice : 305.14
+         * tradeamount : 56668.0000
+         * updatetime : 2019-06-14 23:59:14
          */
 
-        private String closePri;
-        private String highPic;
-        private String limit;
-        private String lowPic;
-        private String name;
-        private String openPri;
-        private String time;
-        private String totalTurnover;
-        private String totalVol;
-        private String variety;
-        private String yesDayPic;
+        private String type;
+        private String typename;
+        private String price;
+        private String openingprice;
+        private String maxprice;
+        private String minprice;
+        private String changepercent;
+        private String lastclosingprice;
+        private String tradeamount;
+        private String updatetime;
 
-        public String getClosePri() {
-            return closePri;
+        public String getType() {
+            return type;
         }
 
-        public void setClosePri(String closePri) {
-            this.closePri = closePri;
+        public void setType(String type) {
+            this.type = type;
         }
 
-        public String getHighPic() {
-            return highPic;
+        public String getTypename() {
+            return typename;
         }
 
-        public void setHighPic(String highPic) {
-            this.highPic = highPic;
+        public void setTypename(String typename) {
+            this.typename = typename;
         }
 
-        public String getLimit() {
-            return limit;
+        public String getPrice() {
+            return price;
         }
 
-        public void setLimit(String limit) {
-            this.limit = limit;
+        public void setPrice(String price) {
+            this.price = price;
         }
 
-        public String getLowPic() {
-            return lowPic;
+        public String getOpeningprice() {
+            return openingprice;
         }
 
-        public void setLowPic(String lowPic) {
-            this.lowPic = lowPic;
+        public void setOpeningprice(String openingprice) {
+            this.openingprice = openingprice;
         }
 
-        public String getName() {
-            return name;
+        public String getMaxprice() {
+            return maxprice;
         }
 
-        public void setName(String name) {
-            this.name = name;
+        public void setMaxprice(String maxprice) {
+            this.maxprice = maxprice;
         }
 
-        public String getOpenPri() {
-            return openPri;
+        public String getMinprice() {
+            return minprice;
         }
 
-        public void setOpenPri(String openPri) {
-            this.openPri = openPri;
+        public void setMinprice(String minprice) {
+            this.minprice = minprice;
         }
 
-        public String getTime() {
-            return time;
+        public String getChangepercent() {
+            return changepercent;
         }
 
-        public void setTime(String time) {
-            this.time = time;
+        public void setChangepercent(String changepercent) {
+            this.changepercent = changepercent;
         }
 
-        public String getTotalTurnover() {
-            return totalTurnover;
+        public String getLastclosingprice() {
+            return lastclosingprice;
         }
 
-        public void setTotalTurnover(String totalTurnover) {
-            this.totalTurnover = totalTurnover;
+        public void setLastclosingprice(String lastclosingprice) {
+            this.lastclosingprice = lastclosingprice;
         }
 
-        public String getTotalVol() {
-            return totalVol;
+        public String getTradeamount() {
+            return tradeamount;
         }
 
-        public void setTotalVol(String totalVol) {
-            this.totalVol = totalVol;
+        public void setTradeamount(String tradeamount) {
+            this.tradeamount = tradeamount;
         }
 
-        public String getVariety() {
-            return variety;
+        public String getUpdatetime() {
+            return updatetime;
         }
 
-        public void setVariety(String variety) {
-            this.variety = variety;
-        }
-
-        public String getYesDayPic() {
-            return yesDayPic;
-        }
-
-        public void setYesDayPic(String yesDayPic) {
-            this.yesDayPic = yesDayPic;
+        public void setUpdatetime(String updatetime) {
+            this.updatetime = updatetime;
         }
     }
 }

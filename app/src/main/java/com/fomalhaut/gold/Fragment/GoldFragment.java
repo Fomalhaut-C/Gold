@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +35,7 @@ import okhttp3.Response;
 public class GoldFragment extends Fragment {
 
     private static RecyclerView gold_rv;
-    private static List<Gold> goldList = new ArrayList<>();
+    private static List<Gold> GoldList = new ArrayList<>();
     private static final int SUCCESS = 1;
     private static final int FAIL = -1;
 
@@ -63,7 +62,7 @@ public class GoldFragment extends Fragment {
     }
 
     private void initData() {
-        String address = "http://apicloud.mob.com/gold/spot/query?key=2b60f172130ba";
+        String address = "https://api.jisuapi.com/gold/shgold?appkey=3069248ceca810cc";
         HttpUtils.sendOkHttpRequest(address, new Callback() {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
@@ -92,7 +91,7 @@ public class GoldFragment extends Fragment {
                 case SUCCESS:
                     String json = (String) msg.obj;
                     Gold gold = new Gson().fromJson(json, Gold.class);
-                    goldList.add(gold);
+                    GoldList.add(gold);
                     gold_rv.setAdapter(new MyAdapter());
                     break;
                 case FAIL:
@@ -111,16 +110,16 @@ public class GoldFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-            Gold.ResultBean resultBean = goldList.get(0).getResult().get(position);
-            holder.gold_item_tv_name.setText(resultBean.getName());
-            holder.gold_item_tv_closePri.setText(resultBean.getClosePri());
-            holder.gold_item_tv_time.setText(resultBean.getTime().substring(11,19));
-            holder.gold_item_tv_limit.setText(resultBean.getLimit());
+            Gold.ResultBean resultBean = GoldList.get(0).getResult().get(position);
+            holder.gold_item_tv_name.setText(resultBean.getTypename());
+            holder.gold_item_tv_closePri.setText(resultBean.getPrice());
+            holder.gold_item_tv_time.setText(resultBean.getUpdatetime().substring(11,19));
+            holder.gold_item_tv_limit.setText(resultBean.getChangepercent());
         }
 
         @Override
         public int getItemCount() {
-            return goldList.get(0).getResult().size();
+            return GoldList.get(0).getResult().size();
         }
 
         class ViewHolder extends RecyclerView.ViewHolder{
