@@ -1,10 +1,13 @@
 package com.fomalhaut.gold;
 
+import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -16,6 +19,7 @@ import com.fomalhaut.gold.Fragment.ForwardFragment;
 import com.fomalhaut.gold.Fragment.GoldFragment;
 import com.fomalhaut.gold.Fragment.MeFragment;
 import com.google.android.material.tabs.TabLayout;
+import com.jaeger.library.StatusBarUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setStatusBar(MainActivity.this);
         initView();
     }
 
@@ -107,6 +112,17 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             return fragmentList.size();
+        }
+    }
+
+    public void setStatusBar(Activity activity) {
+        StatusBarUtil.setColor(activity, getResources().getColor(R.color.colorPrimary));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            StatusBarUtil.setTranslucentForImageViewInFragment(activity,0,null);
+            activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }else {
+            //其他的都设置状态栏成半透明的,以下设置半透明是调用第三方ImmersionBar库的，根据个人需求更改，
+            StatusBarUtil.setTranslucentForImageViewInFragment(activity,100,null);
         }
     }
 }

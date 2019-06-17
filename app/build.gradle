@@ -35,4 +35,5 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation("com.squareup.okhttp3:okhttp:3.14.2")
     testImplementation("com.squareup.okhttp3:mockwebserver:3.14.2")
+    implementation 'com.jaeger.statusbarutil:library:1.5.1'
 }

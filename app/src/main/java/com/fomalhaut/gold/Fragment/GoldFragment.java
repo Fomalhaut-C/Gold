@@ -2,24 +2,29 @@ package com.fomalhaut.gold.Fragment;
 
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fomalhaut.gold.Bean.Gold;
+import com.fomalhaut.gold.Bean.MobGold;
 import com.fomalhaut.gold.R;
 import com.fomalhaut.gold.Utils.HttpUtils;
 import com.google.gson.Gson;
+import com.jaeger.library.StatusBarUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,7 +40,7 @@ import okhttp3.Response;
 public class GoldFragment extends Fragment {
 
     private static RecyclerView gold_rv;
-    private static List<Gold> GoldList = new ArrayList<>();
+    private static List<MobGold> GoldList = new ArrayList<>();
     private static final int SUCCESS = 1;
     private static final int FAIL = -1;
 
@@ -62,7 +67,8 @@ public class GoldFragment extends Fragment {
     }
 
     private void initData() {
-        String address = "https://api.jisuapi.com/gold/shgold?appkey=3069248ceca810cc";
+//        String address = "https://api.jisuapi.com/gold/shgold?appkey=3069248ceca810cc";
+        String address = "http://apicloud.mob.com/gold/spot/query?key=2b60f172130ba";
         HttpUtils.sendOkHttpRequest(address, new Callback() {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
@@ -90,7 +96,7 @@ public class GoldFragment extends Fragment {
             switch (msg.what){
                 case SUCCESS:
                     String json = (String) msg.obj;
-                    Gold gold = new Gson().fromJson(json, Gold.class);
+                    MobGold gold = new Gson().fromJson(json, MobGold.class);
                     GoldList.add(gold);
                     gold_rv.setAdapter(new MyAdapter());
                     break;
@@ -110,11 +116,31 @@ public class GoldFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-            Gold.ResultBean resultBean = GoldList.get(0).getResult().get(position);
-            holder.gold_item_tv_name.setText(resultBean.getTypename());
-            holder.gold_item_tv_closePri.setText(resultBean.getPrice());
-            holder.gold_item_tv_time.setText(resultBean.getUpdatetime().substring(11,19));
-            holder.gold_item_tv_limit.setText(resultBean.getChangepercent());
+            //极速
+//            Gold.ResultBean resultBean = GoldList.get(0).getResult().get(position);
+//            holder.gold_item_tv_name.setText(resultBean.getTypename());
+//            holder.gold_item_tv_closePri.setText(resultBean.getPrice());
+//            holder.gold_item_tv_time.setText(resultBean.getUpdatetime().substring(11,19));
+//            float changepercent = Float.parseFloat(resultBean.getChangepercent().replaceAll("%","").trim());
+//            if (changepercent < 0){
+//                holder.gold_item_tv_limit.setTextColor(Color.parseColor("#C0362E"));
+//                holder.gold_item_tv_limit.setText(resultBean.getChangepercent());
+//            }
+//            holder.gold_item_tv_limit.setText(resultBean.getChangepercent());
+
+            //Mob
+            MobGold.ResultBean resultBean = GoldList.get(0).getResult().get(position);
+            holder.gold_item_tv_name.setText(resultBean.getName());
+            holder.gold_item_tv_closePri.setText(resultBean.getClosePri());
+            holder.gold_item_tv_time.setText(resultBean.getTime().substring(11,19));
+            if (!resultBean.getLimit().equals("--")){
+                float changepercent = Float.parseFloat(resultBean.getLimit().replaceAll("%","").trim());
+                if (changepercent < 0){
+                    holder.gold_item_tv_limit.setTextColor(Color.parseColor("#C0362E"));
+                    holder.gold_item_tv_limit.setText(resultBean.getLimit());
+                }
+            }
+            holder.gold_item_tv_limit.setText(resultBean.getLimit());
         }
 
         @Override
