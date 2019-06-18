@@ -1,30 +1,37 @@
 package com.fomalhaut.gold.Fragment;
 
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.fomalhaut.gold.Bean.Gold;
+import com.fomalhaut.gold.Activity.GoldChartActivity;
 import com.fomalhaut.gold.Bean.MobGold;
 import com.fomalhaut.gold.R;
 import com.fomalhaut.gold.Utils.HttpUtils;
 import com.google.gson.Gson;
-import com.jaeger.library.StatusBarUtil;
+import com.scwang.smartrefresh.header.FunGameHitBlockHeader;
+import com.scwang.smartrefresh.header.fungame.FunGameBase;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.footer.FalsifyFooter;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -62,6 +69,16 @@ public class GoldFragment extends Fragment {
 
     private void initView(View view) {
         gold_rv = view.findViewById(R.id.gold_rv);
+        SmartRefreshLayout gold_srl = view.findViewById(R.id.gold_srl);
+        gold_srl.setOnRefreshListener(refreshLayout -> {
+            initData();
+            gold_srl.finishRefresh(2000);//传入false表示刷新失败
+        });
+        gold_srl.setOnLoadMoreListener(refreshLayout -> {
+            gold_srl.finishLoadMore(2000);//传入false表示加载失败
+        });
+        gold_srl.setRefreshHeader(new FunGameHitBlockHeader(context));
+        gold_srl.setRefreshFooter(new FalsifyFooter(context));
         gold_rv.setLayoutManager(new LinearLayoutManager(context));
         initData();
     }
@@ -75,7 +92,11 @@ public class GoldFragment extends Fragment {
                 String json = response.body().string();
                 Message message = new Message();
                 message.what = SUCCESS;
-                message.obj = json;
+                Bundle bundle = new Bundle();
+                bundle.putString("json", json);
+                message.setData(bundle);
+                message.obj = context;
+                message.obj = getActivity();
                 handler.sendMessage(message);
             }
 
@@ -93,12 +114,15 @@ public class GoldFragment extends Fragment {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            switch (msg.what){
+            switch (msg.what) {
                 case SUCCESS:
-                    String json = (String) msg.obj;
+                    Context mcontext = (Context) msg.obj;
+                    Activity activity = (Activity) msg.obj;
+                    Bundle bundle = msg.getData();
+                    String json = bundle.getString("json");
                     MobGold gold = new Gson().fromJson(json, MobGold.class);
                     GoldList.add(gold);
-                    gold_rv.setAdapter(new MyAdapter());
+                    gold_rv.setAdapter(new MyAdapter(mcontext,activity));
                     break;
                 case FAIL:
                     Context context = (Context) msg.obj;
@@ -108,6 +132,14 @@ public class GoldFragment extends Fragment {
     }
 
     private static class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+        private Context context;
+        private Activity activity;
+
+        private MyAdapter(Context context,Activity activity) {
+            this.context = context;
+            this.activity = activity;
+        }
+
         @NonNull
         @Override
         public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -132,15 +164,26 @@ public class GoldFragment extends Fragment {
             MobGold.ResultBean resultBean = GoldList.get(0).getResult().get(position);
             holder.gold_item_tv_name.setText(resultBean.getName());
             holder.gold_item_tv_closePri.setText(resultBean.getClosePri());
-            holder.gold_item_tv_time.setText(resultBean.getTime().substring(11,19));
-            if (!resultBean.getLimit().equals("--")){
-                float changepercent = Float.parseFloat(resultBean.getLimit().replaceAll("%","").trim());
-                if (changepercent < 0){
+            holder.gold_item_tv_time.setText(resultBean.getTime().substring(11, 19));
+            if (!resultBean.getLimit().equals("--")) {
+                float changepercent = Float.parseFloat(resultBean.getLimit().replaceAll("%", "").trim());
+                if (changepercent < 0) {
                     holder.gold_item_tv_limit.setTextColor(Color.parseColor("#C0362E"));
                     holder.gold_item_tv_limit.setText(resultBean.getLimit());
                 }
             }
             holder.gold_item_tv_limit.setText(resultBean.getLimit());
+            holder.view.setOnClickListener(v -> {
+                Intent intent = new Intent(context, GoldChartActivity.class);
+                intent.putExtra("close", resultBean.getClosePri());
+                intent.putExtra("limit", resultBean.getLimit());
+                intent.putExtra("open", resultBean.getOpenPri());
+                intent.putExtra("yes", resultBean.getYesDayPic());
+                intent.putExtra("high", resultBean.getHighPic());
+                intent.putExtra("low", resultBean.getLowPic());
+                activity.startActivityForResult(intent,100);
+                /*Toast.makeText(context,"你点击了第" + position + "个item",Toast.LENGTH_SHORT).show();*/
+            });
         }
 
         @Override
@@ -148,7 +191,7 @@ public class GoldFragment extends Fragment {
             return GoldList.get(0).getResult().size();
         }
 
-        class ViewHolder extends RecyclerView.ViewHolder{
+        class ViewHolder extends RecyclerView.ViewHolder {
             View view;
             TextView gold_item_tv_name;
             TextView gold_item_tv_closePri;
@@ -164,5 +207,10 @@ public class GoldFragment extends Fragment {
                 this.gold_item_tv_limit = (TextView) view.findViewById(R.id.gold_item_tv_limit);
             }
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
