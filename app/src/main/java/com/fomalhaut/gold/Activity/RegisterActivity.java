@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.fomalhaut.gold.R;
 import com.fomalhaut.gold.Table.User;
+import com.fomalhaut.gold.Utils.MD5Utils;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -77,8 +78,9 @@ public class RegisterActivity extends AppCompatActivity{
                 Toast.makeText(this, "两次密码输入不一致", Toast.LENGTH_SHORT).show();
             }else{
                 User user = new User();
+                String generate = MD5Utils.generate(password);
                 user.setUsername(username);
-                user.setPassword(password);
+                user.setPassword(generate);
                 user.setPhone(phone);
                 if (user.save()){
                     Toast.makeText(RegisterActivity.this,"注册成功",Toast.LENGTH_SHORT).show();

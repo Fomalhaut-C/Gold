@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.fomalhaut.gold.MainActivity;
 import com.fomalhaut.gold.R;
 import com.fomalhaut.gold.Table.User;
+import com.fomalhaut.gold.Utils.MD5Utils;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -76,13 +77,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.register_btn_register:
                 String username = login_et_user.getText().toString().trim();
                 String password = login_et_psw.getText().toString().trim();
-                List<User> login = LitePal.where("username = ? and password = ?", username, password).find(User.class);
                 List<User> users = LitePal.where("username = ?", username).find(User.class);
                 if (TextUtils.isEmpty(username)){
                     Toast.makeText(this, "用户名不可以为空", Toast.LENGTH_SHORT).show();
                 }else if (TextUtils.isEmpty(password)){
                     Toast.makeText(this, "密码不可以为空", Toast.LENGTH_SHORT).show();
-                }else if (login.size() > 0){
+                }else if (users.size() > 0 && MD5Utils.verify(password,users.get(0).getPassword())){
                     Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     finish();
