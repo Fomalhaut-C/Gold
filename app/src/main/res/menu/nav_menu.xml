@@ -8,7 +8,7 @@
         <item
             android:id="@+id/replace_user"
             android:icon="@mipmap/ic_replace"
-            android:title="更换帐号" />
+            android:title="切换帐号" />
         <item
             android:id="@+id/exit"
             android:title="退出"
