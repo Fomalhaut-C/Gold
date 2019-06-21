@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+        android:id="@+id/update_phone"
+        android:title="更换密保手机"
+        android:icon="@mipmap/ic_update_phone"/>
+        <item
+            android:id="@+id/replace_user"
+            android:icon="@mipmap/ic_replace"
+            android:title="更换帐号" />
+        <item
+            android:id="@+id/exit"
+            android:title="退出"
+            android:icon="@mipmap/ic_exit"/>
+    </group>
+</menu>

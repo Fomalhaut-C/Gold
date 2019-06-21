@@ -1,7 +1,6 @@
 package com.fomalhaut.gold.Activity;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -16,6 +15,7 @@ import com.fomalhaut.gold.MainActivity;
 import com.fomalhaut.gold.R;
 import com.fomalhaut.gold.Table.User;
 import com.fomalhaut.gold.Utils.MD5Utils;
+import com.fomalhaut.gold.Utils.SharedPreferencesUtils;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -84,6 +84,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Toast.makeText(this, "密码不可以为空", Toast.LENGTH_SHORT).show();
                 }else if (users.size() > 0 && MD5Utils.verify(password,users.get(0).getPassword())){
                     Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
+                    SharedPreferencesUtils.saveBoolean(LoginActivity.this,"isLogin",true);
+                    SharedPreferencesUtils.saveString(LoginActivity.this,"user",username);
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     finish();
                 }else if (users.size() > 0){
