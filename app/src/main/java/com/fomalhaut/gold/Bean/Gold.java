@@ -4,143 +4,154 @@ import java.util.List;
 
 public class Gold {
 
+
     /**
-     * status : 0
-     * msg : ok
-     * result : [{"type":"Au(T+D)","typename":"黄金延期","price":"304.53","openingprice":"304.90","maxprice":"305.45","minprice":"303.50","changepercent":"-0.20%","lastclosingprice":"305.14","tradeamount":"56668.0000","updatetime":"2019-06-14 23:59:14"},{"type":"mAu(T+D)","typename":"迷你黄金延期","price":"304.44","openingprice":"305.00","maxprice":"306.11","minprice":"303.61","changepercent":"-0.21%","lastclosingprice":"305.09","tradeamount":"49918.0000","updatetime":"2019-06-14 23:59:04"},{"type":"Au99.99","typename":"沪金99","price":"304.40","openingprice":"306.00","maxprice":"306.01","minprice":"303.60","changepercent":"-0.21%","lastclosingprice":"305.04","tradeamount":"14458.0000","updatetime":"2019-06-14 23:59:13"},{"type":"Au(T+N2)","typename":"延期双金","price":"307.20","openingprice":"317.00","maxprice":"317.00","minprice":"306.10","changepercent":"-0.03%","lastclosingprice":"307.30","tradeamount":"612.0000","updatetime":"2019-06-14 23:59:14"},{"type":"Au(T+N1)","typename":"延期单金","price":"311.50","openingprice":"306.60","maxprice":"313.00","minprice":"306.60","changepercent":"2.00%","lastclosingprice":"305.40","tradeamount":"272.0000","updatetime":"2019-06-14 23:59:14"},{"type":"iAu99.99","typename":"IAU99.99","price":"301.00","openingprice":"302.00","maxprice":"302.00","minprice":"300.80","changepercent":"-0.49%","lastclosingprice":"302.47","tradeamount":"120.0000","updatetime":"2019-06-14 23:59:03"},{"type":"Au100g","typename":"沪金100G","price":"304.00","openingprice":"305.25","maxprice":"305.25","minprice":"303.55","changepercent":"-0.11%","lastclosingprice":"304.33","tradeamount":"32.0000","updatetime":"2019-06-14 23:59:13"},{"type":"Au99.95","typename":"沪金95","price":"305.00","openingprice":"305.00","maxprice":"305.00","minprice":"305.00","changepercent":"-0.01%","lastclosingprice":"305.02","tradeamount":"6.0000","updatetime":"2019-06-14 23:59:13"},{"type":"iAu100g","typename":"IAU100G","price":"0.00","openingprice":"0.00","maxprice":"0.00","minprice":"0.00","changepercent":"0.00%","lastclosingprice":"280.00","tradeamount":"0.0000","updatetime":"2019-06-14 23:59:13"},{"type":"iAu99.5","typename":"IAU99.5","price":"0.00","openingprice":"0.00","maxprice":"0.00","minprice":"0.00","changepercent":"0.00%","lastclosingprice":"237.80","tradeamount":"0.0000","updatetime":"2019-06-14 23:59:03"},{"type":"Pt99.95","typename":"沪铂95","price":"0.00","openingprice":"0.00","maxprice":"0.00","minprice":"0.00","changepercent":"0.00%","lastclosingprice":"187.50","tradeamount":"0.0000","updatetime":"2019-06-14 23:59:03"}]
+     * code : 0
+     * data : [{"ask":1381.35,"bid":1381.27,"contractSize":100,"ctm":1560722400,"digits":2,"symbol":"XAUUSD","todayHigh":1393.86,"todayLow":1357.73,"todayOpen":1360.29,"trade":2,"workingTime":true,"yesterdayClose":1360.34},{"ask":1511.09,"bid":1504.74,"contractSize":150,"ctm":1560722400,"digits":1,"symbol":"XPDUSD","todayHigh":1505.37,"todayLow":1500.63,"todayOpen":1500.9,"trade":2,"workingTime":true,"yesterdayClose":1498.16},{"ask":815.22,"bid":814.23,"contractSize":150,"ctm":1560722400,"digits":2,"symbol":"XPTUSD","todayHigh":815.08,"todayLow":810.64,"todayOpen":812.05,"trade":2,"workingTime":true,"yesterdayClose":810.93},{"ask":1385.8,"bid":1385.7,"contractSize":10,"ctm":1560722400,"digits":2,"symbol":"GOLD.comex","todayHigh":1396.9,"todayLow":1361.3,"todayOpen":1364.4,"trade":1,"workingTime":true,"yesterdayClose":1364.3},{"ask":1499.5,"bid":1498.3,"contractSize":10,"ctm":1560722400,"digits":2,"symbol":"PALL.comex","todayHigh":1499,"todayLow":1493.1,"todayOpen":1493.1,"trade":1,"workingTime":true,"yesterdayClose":1494.7},{"ask":814.5,"bid":814.2,"contractSize":10,"ctm":1560722400,"digits":2,"symbol":"PLAT.comex","todayHigh":814.8,"todayLow":810.3,"todayOpen":811.3,"trade":1,"workingTime":true,"yesterdayClose":811.1},{"ask":815.41,"bid":814.68,"contractSize":10,"ctm":1560722400,"digits":2,"symbol":"PMAP","todayHigh":815.27,"todayLow":809.16,"todayOpen":811.88,"trade":1,"workingTime":true,"yesterdayClose":812.06}]
      */
 
-    private int status;
-    private String msg;
-    private List<ResultBean> result;
+    private String code;
+    private List<DataBean> data;
 
-    public int getStatus() {
-        return status;
+    public String getCode() {
+        return code;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public String getMsg() {
-        return msg;
+    public List<DataBean> getData() {
+        return data;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setData(List<DataBean> data) {
+        this.data = data;
     }
 
-    public List<ResultBean> getResult() {
-        return result;
-    }
-
-    public void setResult(List<ResultBean> result) {
-        this.result = result;
-    }
-
-    public static class ResultBean {
+    public static class DataBean {
         /**
-         * type : Au(T+D)
-         * typename : 黄金延期
-         * price : 304.53
-         * openingprice : 304.90
-         * maxprice : 305.45
-         * minprice : 303.50
-         * changepercent : -0.20%
-         * lastclosingprice : 305.14
-         * tradeamount : 56668.0000
-         * updatetime : 2019-06-14 23:59:14
+         * ask : 1381.35
+         * bid : 1381.27
+         * contractSize : 100
+         * ctm : 1560722400
+         * digits : 2
+         * symbol : XAUUSD
+         * todayHigh : 1393.86
+         * todayLow : 1357.73
+         * todayOpen : 1360.29
+         * trade : 2
+         * workingTime : true
+         * yesterdayClose : 1360.34
          */
 
-        private String type;
-        private String typename;
-        private String price;
-        private String openingprice;
-        private String maxprice;
-        private String minprice;
-        private String changepercent;
-        private String lastclosingprice;
-        private String tradeamount;
-        private String updatetime;
+        private double ask;
+        private double bid;
+        private int contractSize;
+        private int ctm;
+        private int digits;
+        private String symbol;
+        private double todayHigh;
+        private double todayLow;
+        private double todayOpen;
+        private int trade;
+        private boolean workingTime;
+        private double yesterdayClose;
 
-        public String getType() {
-            return type;
+        public double getAsk() {
+            return ask;
         }
 
-        public void setType(String type) {
-            this.type = type;
+        public void setAsk(double ask) {
+            this.ask = ask;
         }
 
-        public String getTypename() {
-            return typename;
+        public double getBid() {
+            return bid;
         }
 
-        public void setTypename(String typename) {
-            this.typename = typename;
+        public void setBid(double bid) {
+            this.bid = bid;
         }
 
-        public String getPrice() {
-            return price;
+        public int getContractSize() {
+            return contractSize;
         }
 
-        public void setPrice(String price) {
-            this.price = price;
+        public void setContractSize(int contractSize) {
+            this.contractSize = contractSize;
         }
 
-        public String getOpeningprice() {
-            return openingprice;
+        public int getCtm() {
+            return ctm;
         }
 
-        public void setOpeningprice(String openingprice) {
-            this.openingprice = openingprice;
+        public void setCtm(int ctm) {
+            this.ctm = ctm;
         }
 
-        public String getMaxprice() {
-            return maxprice;
+        public int getDigits() {
+            return digits;
         }
 
-        public void setMaxprice(String maxprice) {
-            this.maxprice = maxprice;
+        public void setDigits(int digits) {
+            this.digits = digits;
         }
 
-        public String getMinprice() {
-            return minprice;
+        public String getSymbol() {
+            return symbol;
         }
 
-        public void setMinprice(String minprice) {
-            this.minprice = minprice;
+        public void setSymbol(String symbol) {
+            this.symbol = symbol;
         }
 
-        public String getChangepercent() {
-            return changepercent;
+        public double getTodayHigh() {
+            return todayHigh;
         }
 
-        public void setChangepercent(String changepercent) {
-            this.changepercent = changepercent;
+        public void setTodayHigh(double todayHigh) {
+            this.todayHigh = todayHigh;
         }
 
-        public String getLastclosingprice() {
-            return lastclosingprice;
+        public double getTodayLow() {
+            return todayLow;
         }
 
-        public void setLastclosingprice(String lastclosingprice) {
-            this.lastclosingprice = lastclosingprice;
+        public void setTodayLow(double todayLow) {
+            this.todayLow = todayLow;
         }
 
-        public String getTradeamount() {
-            return tradeamount;
+        public double getTodayOpen() {
+            return todayOpen;
         }
 
-        public void setTradeamount(String tradeamount) {
-            this.tradeamount = tradeamount;
+        public void setTodayOpen(double todayOpen) {
+            this.todayOpen = todayOpen;
         }
 
-        public String getUpdatetime() {
-            return updatetime;
+        public int getTrade() {
+            return trade;
         }
 
-        public void setUpdatetime(String updatetime) {
-            this.updatetime = updatetime;
+        public void setTrade(int trade) {
+            this.trade = trade;
+        }
+
+        public boolean isWorkingTime() {
+            return workingTime;
+        }
+
+        public void setWorkingTime(boolean workingTime) {
+            this.workingTime = workingTime;
+        }
+
+        public double getYesterdayClose() {
+            return yesterdayClose;
+        }
+
+        public void setYesterdayClose(double yesterdayClose) {
+            this.yesterdayClose = yesterdayClose;
         }
     }
 }

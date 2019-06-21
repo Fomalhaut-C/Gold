@@ -1,42 +1,81 @@
 package com.fomalhaut.gold;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.fomalhaut.gold.Fragment.BankFragment;
-import com.fomalhaut.gold.Fragment.ForwardFragment;
-import com.fomalhaut.gold.Fragment.GoldFragment;
-import com.fomalhaut.gold.Fragment.MeFragment;
-import com.google.android.material.tabs.TabLayout;
+import com.fomalhaut.gold.Activity.GoldChartActivity;
+import com.fomalhaut.gold.Activity.LoginActivity;
+import com.fomalhaut.gold.Bean.Gold;
+import com.fomalhaut.gold.Utils.HttpUtils;
+import com.fomalhaut.gold.Utils.SharedPreferencesUtils;
+import com.google.android.material.navigation.NavigationView;
+import com.google.gson.Gson;
 import com.jaeger.library.StatusBarUtil;
+import com.scwang.smartrefresh.header.FunGameHitBlockHeader;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.footer.FalsifyFooter;
 
+import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ViewPager main_vp;
-    private TabLayout main_tl;
+
+    private static RecyclerView gold_rv;
+    private static List<Gold> GoldList = new ArrayList<>();
+    private static final int SUCCESS = 1;
+    private static final int FAIL = -1;
+    private MyHandler handler;
+    private DrawerLayout drawerlayout;
+    private SmartRefreshLayout gold_srl;
+    private Toolbar toolbar;
+    private NavigationView main_nav;
+    private MyAdapter adapter = new MyAdapter();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setStatusBar(MainActivity.this);
+        handler = new MyHandler();
         initView();
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.mipmap.ic_menu);
+        }
     }
 
     private void initView() {
@@ -45,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
         initVp();
         initTl();
     }
-
     private void initTl() {
         main_tl.addTab(main_tl.newTab().setText("黄金").setIcon(R.drawable.selector_gold));
         main_tl.addTab(main_tl.newTab().setText("期货").setIcon(R.drawable.selector_forward));
@@ -69,7 +107,6 @@ public class MainActivity extends AppCompatActivity {
         });
         changeIconImgBottomMargin(main_tl,3);
     }
-
     private void initVp() {
         List<Fragment> fragmentList = new ArrayList<>();
         fragmentList.add(new GoldFragment(MainActivity.this));
@@ -85,7 +122,6 @@ public class MainActivity extends AppCompatActivity {
         });
         main_vp.setOffscreenPageLimit(4);
     }
-
     private void changeIconImgBottomMargin(ViewGroup parent, int px) {
         for (int i = 0; i < parent.getChildCount(); i++) {
             View child = parent.getChildAt(i);
@@ -98,7 +134,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
     private class MyVpAdapter extends FragmentStatePagerAdapter{
         List<Fragment> fragmentList;
         public MyVpAdapter(FragmentManager fm,List <Fragment> fragmentList) {
@@ -115,32 +150,5 @@ public class MainActivity extends AppCompatActivity {
         public int getCount() {
             return fragmentList.size();
         }
-    }
-
-    public void setStatusBar(Activity activity) {
-        StatusBarUtil.setColor(activity, getResources().getColor(R.color.colorPrimary));
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            StatusBarUtil.setTranslucentForImageViewInFragment(activity,0,null);
-            activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        }else {
-            //其他的都设置状态栏成半透明的,以下设置半透明是调用第三方ImmersionBar库的，根据个人需求更改，
-            StatusBarUtil.setTranslucentForImageViewInFragment(activity,100,null);
-        }
-    }
-
-    // 用来计算返回键的点击间隔时间
-    private long exitTime = 0;
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){
-            if ((System.currentTimeMillis() - exitTime) > 2000){
-                Toast.makeText(this, "再按一次退出应用程序", Toast.LENGTH_SHORT).show();
-                exitTime = System.currentTimeMillis();
-            }else {
-                finish();
-            }
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
-    }
+    }*/
 }
