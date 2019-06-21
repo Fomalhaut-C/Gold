@@ -148,6 +148,7 @@ public class GoldChartActivity extends AppCompatActivity {
                 candleEntries.add(new CandleEntry(i, high, low, open, close));
             }
         }else {
+            candleEntries.remove(0);
             Gold.DataBean dataBean = TopList.get(0).getData().get(0);
             float high = (float) dataBean.getTodayHigh();
             float low = (float) dataBean.getTodayLow();
@@ -266,7 +267,7 @@ public class GoldChartActivity extends AppCompatActivity {
         @Override
         public void run() {
             initData();
-            handler.postDelayed(this,1000);
+            handler.postDelayed(this,5000);
         }
     };
 

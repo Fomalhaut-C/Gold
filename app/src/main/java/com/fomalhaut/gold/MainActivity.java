@@ -91,12 +91,12 @@ public class MainActivity extends AppCompatActivity {
             tv_user.setText(user);
         }else {
             tv_user.setText("点击登录");
+            headerView.setOnClickListener(v -> {
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                SharedPreferencesUtils.ClearData(MainActivity.this);
+                finish();
+            });
         }
-        headerView.setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, LoginActivity.class));
-            SharedPreferencesUtils.ClearData(MainActivity.this);
-            finish();
-        });
         main_nav.setNavigationItemSelectedListener(menuItem -> {
             switch (menuItem.getItemId()){
                 case R.id.update_phone:
@@ -237,7 +237,6 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, GoldChartActivity.class);
                 intent.putExtra("symbol", dataBean.getSymbol());
                 startActivity(intent);
-                finish();
             });
         }
 
